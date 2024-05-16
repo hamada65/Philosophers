@@ -53,6 +53,5 @@ void	long_incrementation(pthread_mutex_t *mutex, long *value)
 {
 	pthread_mutex_lock(mutex);
 	(*value)++;
-	printf("✅ incrementation\n");
 	pthread_mutex_unlock(mutex);
 }

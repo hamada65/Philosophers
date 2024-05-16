@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:23:14 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/15 03:07:36 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/16 01:16:57 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void print_status(long start, char *status, t_philo *philo, long now)
 	if (philo->max || !running_simulation(philo->data))
 		return ;
 	time = now - start;
-	printf("%ld Philo %d %s\n", time, philo->id, status);
+	printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", time, philo->id, status);
 }
 
 void	start_simulation(t_data *data)
@@ -50,7 +50,7 @@ void	start_simulation(t_data *data)
 		pthread_join(tmp->thread, NULL);
 		tmp = tmp->next;
 	}
-	printf("finished all threads");
+	set_bool(&data->table_mutex, &data->monitor, false);	
 	pthread_join(data->monitor_thread, NULL);
 	// mean all philo are full
 }

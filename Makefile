@@ -4,7 +4,8 @@ SRCS =  philo.c \
 		simulation/get_set.c \
 		simulation/philo_routine.c \
 		simulation/utils.c \
-		simulation/monitor_routine.c
+		simulation/monitor_routine.c \
+		clearing/clear.c
 NAME = philo
 OBJS = ${SRCS:.c=.o}
 CC = cc

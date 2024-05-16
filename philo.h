@@ -24,9 +24,9 @@ typedef struct s_philo
 	pthread_t thread;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
-	struct s_philo *next;
 	pthread_mutex_t philo_mutex;// protect from data race with monitor 
 	t_data *data;
+	struct s_philo *next;
 } t_philo;
 
 struct s_data
@@ -65,8 +65,10 @@ void *monitor_routine(void *arg);
 
 //utils
 long	gettime(t_time type);
-void error_handling(char *error);
 void print_status(long start, char *status, t_philo *philo, long now);
 void	de_synchronize_philos(t_philo *philo);
 void thinking(t_philo *philo, bool  pre_simul);
 void my_usleep(long time);
+
+//clear and exit
+void clear_all(t_data *data);

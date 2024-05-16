@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 05:37:02 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/15 03:07:03 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/16 01:17:07 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void *monitor_routine(void *arg)
 			if (check_dead(tmp))
 			{
 				set_bool(&data->table_mutex, &data->monitor, false);
-				printf("%ld Philo %d %s\n", gettime(MILLISECOND) - data->start_time, tmp->id, "is dead");
+				printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", gettime(MILLISECOND) - data->start_time, tmp->id, "\033[1;31mis dead 💀");
 			}
 			if (data->required_meals != -1 && all_reached_max(data))
 			{

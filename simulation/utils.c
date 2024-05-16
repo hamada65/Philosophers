@@ -24,15 +24,7 @@ long	gettime(t_time type)
 		return (now.tv_sec * 1000 + now.tv_usec / 1000);
 	else if (type == MICROSECOND)
 		return (now.tv_sec * 1000000 + now.tv_usec);
-	else
-		error_handling("gettime error");
 	return (0);
-}
-
-void error_handling(char *error)
-{
-	printf("Error : %s\n", error);
-	exit(1337);
 }
 
 void	de_synchronize_philos(t_philo *philo)
