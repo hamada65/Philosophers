@@ -2,6 +2,7 @@
 #include  <pthread.h>
 #include  <stdio.h>
 #include  <unistd.h>
+#include <limits.h>
 #include  <sys/time.h>
 #include <stdbool.h>
 
@@ -49,6 +50,10 @@ struct s_data
 bool	data_init(int ac, char **av, t_data *data);
 void	start_simulation(t_data *data);
 
+//parsing
+long	ft_atol(const char *nptr);
+bool check_input(int ac, char **av);
+
 /// getters and setters
 void set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
 bool get_bool(pthread_mutex_t *mutex, bool *value);
@@ -59,6 +64,7 @@ void	long_incrementation(pthread_mutex_t *mutex, long *value);
 
 //philo routine
 void *philo_routine(void *arg);
+void one_philo(t_data *data);
 
 //monitor routine
 void *monitor_routine(void *arg);

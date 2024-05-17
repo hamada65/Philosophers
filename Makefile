@@ -5,7 +5,10 @@ SRCS =  philo.c \
 		simulation/philo_routine.c \
 		simulation/utils.c \
 		simulation/monitor_routine.c \
-		clearing/clear.c
+		clearing/clear.c \
+		simulation/one_philo.c \
+		parsing/check_input.c \
+		parsing/ft_atol.c
 NAME = philo
 OBJS = ${SRCS:.c=.o}
 CC = cc

@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:04:25 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/15 01:04:40 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/17 03:15:03 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ bool	data_init(int ac, char **av, t_data *data)
 {
 	data->required_meals = -1;
 	if (ac == 6)
-		data->required_meals = atoi(av[5]);
-	data->nb_philo = atoi(av[1]);
-	data->time_to_die = atoi(av[2]);
-	data->time_to_eat = atoi(av[3]);
-	data->time_to_sleep = atoi(av[4]);
+		data->required_meals = ft_atol(av[5]);
+	data->nb_philo = ft_atol(av[1]);
+	data->time_to_die = ft_atol(av[2]);
+	data->time_to_eat = ft_atol(av[3]);
+	data->time_to_sleep = ft_atol(av[4]);
 	data->philo = NULL;
 	data->monitor = true;
 	data->ready_to_start = false;
