@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:23:14 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/16 01:16:57 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/17 03:45:12 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	start_simulation(t_data *data)
 
 	if (!data->required_meals)
 		return ;
+	if (data->nb_philo == 1)
+		return (one_philo(data));
 	tmp = data->philo;
 	while (tmp)
 	{
