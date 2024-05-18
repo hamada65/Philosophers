@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:40:07 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/17 03:22:10 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 04:13:59 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ int main(int ac, char **av)
 	{
 		if (check_input(ac, av) && data_init(ac, av, &data))
 		{
-			printf("init\n");
 			start_simulation(&data);
-			printf("simulation ended\n");
 			clear_all(&data);
-			printf("cleared\n");
 		}
 	}
 	else
