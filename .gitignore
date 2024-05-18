@@ -1,4 +1,5 @@
 *.o
 */*.o
+*/*/*.o
 .vscode
-philo
+philo/philo
