@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:04:25 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/17 03:15:03 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 05:11:33 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void philo_add_back(t_philo **alst, t_philo *new)
 	tmp->next = new;
 }
 
-void init_philo(t_data	*data)
+bool init_philo(t_data	*data)
 {
 	int i;
 	t_philo *tmp;
@@ -36,6 +36,8 @@ void init_philo(t_data	*data)
 	while (i < data->nb_philo)
 	{
 		tmp = malloc(sizeof(t_philo));
+		if (!tmp)
+			return (false);
 		tmp->id = i + 1;
 		tmp->meals_nb = 0;
 		tmp->last_meal = -1;
@@ -53,6 +55,7 @@ void init_philo(t_data	*data)
 		pthread_mutex_init(&tmp->philo_mutex, NULL);
 		i++;
 	}
+	return (true);
 }
 
 void init_mutex(t_data *data)
@@ -80,11 +83,20 @@ bool	data_init(int ac, char **av, t_data *data)
 	data->philo = NULL;
 	data->monitor = true;
 	data->ready_to_start = false;
-	data->running_threads = 0;
+	data->forks = NULL;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->forks)
+	{
+		printf("\033[1;31m Memory Allocation Error ❌\033[0m\n");
 		return (false);
-	init_philo(data);
+	}
+	if  (!init_philo(data))
+	{
+		free(data->forks);
+    	clear_philos(data->philo);
+		printf("\033[1;31m Memory Allocation Error ❌\033[0m\n");		
+		return (false);
+	}
 	init_mutex(data);
 	return (true);
 }

@@ -33,7 +33,6 @@ typedef struct s_philo
 struct s_data
 {
 	long nb_philo;
-	long running_threads;
 	long time_to_die;
 	long time_to_eat;
 	long time_to_sleep;
@@ -78,3 +77,4 @@ void my_usleep(long time);
 
 //clear and exit
 void clear_all(t_data *data);
+void clear_philos(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 03:47:22 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/16 01:13:25 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 05:11:25 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void *philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	wait_philosophers(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal, gettime(MILLISECOND));
-	long_incrementation(&philo->data->table_mutex, &philo->data->running_threads);
 	de_synchronize_philos(philo);
 	while (running_simulation(philo->data))
 	{

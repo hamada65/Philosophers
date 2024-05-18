@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 05:37:02 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/18 04:14:12 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 05:11:29 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,16 @@ bool check_dead(t_philo *philo)
 
 bool all_started(t_data *data)
 {
-	if (get_long(&data->table_mutex, &data->running_threads) == data->nb_philo)
-		return (true);
-	return (false);
-	// t_philo *tmp;
+	t_philo *tmp;
 
-	// tmp = data->philo;
-	// while (tmp)
-	// {
-	// 	if (tmp->last_meal == -1)
-	// 		return (false);
-	// 	tmp = tmp->next;
-	// }
-	// return (true);
+	tmp = data->philo;
+	while (tmp)
+	{
+		if (tmp->last_meal == -1)
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
 }
 
 bool	all_reached_max(t_data *data)

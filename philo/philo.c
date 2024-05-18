@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:40:07 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/18 04:13:59 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 04:51:19 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int ac, char **av)
 {
 	t_data data;
-	if ((ac == 5 || ac == 6))
+	if (ac == 5 || ac == 6)
 	{
 		if (check_input(ac, av) && data_init(ac, av, &data))
 		{

@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:23:14 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/17 03:45:12 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/18 05:01:16 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,9 @@ void	start_simulation(t_data *data)
 		pthread_create(&tmp->thread, NULL, &philo_routine, tmp);
 		tmp = tmp->next;
 	}
-	//monitoring thread
 	pthread_create(&data->monitor_thread, NULL, &monitor_routine, data);
-	// pthread_detach(data->monitor_thread);
-	//set start simulation time
 	data->start_time = gettime(MILLISECOND);
-	
-	//SET ALL THREAD AS READY
 	set_bool(&data->table_mutex, &data->ready_to_start, true);
-
-	//join all philo
 	tmp = data->philo;
 	while (tmp)
 	{
@@ -54,5 +47,4 @@ void	start_simulation(t_data *data)
 	}
 	set_bool(&data->table_mutex, &data->monitor, false);	
 	pthread_join(data->monitor_thread, NULL);
-	// mean all philo are full
 }
