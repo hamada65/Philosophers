@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 04:11:15 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/15 03:19:55 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/19 03:35:35 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	de_synchronize_philos(t_philo *philo)
 	else
 	{
 		if (philo->id % 2)
-			thinking(philo, true);
+			thinking(philo, false);
 	}
 }
 

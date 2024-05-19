@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 03:47:22 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/18 05:11:25 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/19 03:35:30 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,35 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-void thinking(t_philo *philo, bool  pre_simul)
+/*
+	if philo numbers are even
+		think time will be 0
+	if philo numbers are odd, the philo must respect their turn to eat
+		if t_eat > t_sleep
+			think time will be (t_eat * 2) - t_sleep
+		else if t_eat == t_sleep
+			think time will be t_eat
+		else if t_eat < t_sleep
+			think time will be 0
+		so that the philo can eat in their turn
+*/
+void thinking(t_philo *philo, bool  print)
 {
 	long	t_eat;
 	long	t_sleep;
 	long	t_think;
 
-	if (!pre_simul)
+	if (print)
 		print_status(philo->data->start_time, "\033[1;35mis thinking 💭", philo, gettime(MILLISECOND));
 	if (philo->data->nb_philo % 2 == 0)
 		return ;
 	t_eat = philo->data->time_to_eat;
 	t_sleep = philo->data->time_to_sleep;
-	t_think = (t_eat * 2) - t_sleep;
-	if (t_think < 0)
+	if (t_sleep > t_eat)
 		t_think = 0;
-	my_usleep(t_think * 0.42);
+	else if (t_sleep <= t_eat)
+		t_think = (t_eat * 2) - t_sleep;
+	my_usleep(t_think/2);
 }
 
 void *philo_routine(void *arg)
@@ -71,7 +84,7 @@ void *philo_routine(void *arg)
 			break;
 		eating(philo);
 		sleeping(philo);
-		thinking(philo, false);
+		thinking(philo, true);
 	}
 	return (NULL);
 }

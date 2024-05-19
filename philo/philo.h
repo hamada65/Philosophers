@@ -72,7 +72,7 @@ void *monitor_routine(void *arg);
 long	gettime(t_time type);
 void print_status(long start, char *status, t_philo *philo, long now);
 void	de_synchronize_philos(t_philo *philo);
-void thinking(t_philo *philo, bool  pre_simul);
+void thinking(t_philo *philo, bool  print);
 void my_usleep(long time);
 
 //clear and exit
