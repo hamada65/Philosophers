@@ -12,7 +12,7 @@
 
 #include "../philo.h"
 
-bool check_dead(t_philo *philo)
+bool	check_dead(t_philo *philo)
 {
 	long	elapsed;
 	long	t_to_die;
@@ -27,9 +27,9 @@ bool check_dead(t_philo *philo)
 	return (false);
 }
 
-bool all_started(t_data *data)
+bool	all_started(t_data *data)
 {
-	t_philo *tmp;
+	t_philo	*tmp;
 
 	tmp = data->philo;
 	while (tmp)
@@ -43,7 +43,7 @@ bool all_started(t_data *data)
 
 bool	all_reached_max(t_data *data)
 {
-	t_philo *tmp;
+	t_philo	*tmp;
 
 	tmp = data->philo;
 	while (tmp)
@@ -55,13 +55,14 @@ bool	all_reached_max(t_data *data)
 	return (true);
 }
 
-void *monitor_routine(void *arg)
+void	*monitor_routine(void *arg)
 {
-	t_data *data;
-	t_philo *tmp;
+	t_data	*data;
+	t_philo	*tmp;
 
 	data = (void *)arg;
-	while(!all_started(data));
+	while (!all_started(data))
+		;
 	while (running_simulation(data))
 	{
 		tmp = data->philo;
@@ -70,7 +71,9 @@ void *monitor_routine(void *arg)
 			if (check_dead(tmp))
 			{
 				set_bool(&data->table_mutex, &data->monitor, false);
-				printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", gettime(MILLISECOND) - data->start_time, tmp->id, "\033[1;31mis dead 💀");
+				printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n",
+					gettime(MILLISECOND) - data->start_time, tmp->id,
+					"\033[1;31mis dead 💀");
 			}
 			if (data->required_meals != -1 && all_reached_max(data))
 				set_bool(&data->table_mutex, &data->monitor, false);

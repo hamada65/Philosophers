@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 04:11:15 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/19 03:35:35 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:16:39 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 long	gettime(t_time type)
 {
-	struct timeval now;
+	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	//gettime in seconds
 	if (type == SECOND)
 		return (now.tv_sec);
 	else if (type == MILLISECOND)
@@ -41,7 +40,7 @@ void	de_synchronize_philos(t_philo *philo)
 	}
 }
 
-void my_usleep(long time)
+void	my_usleep(long time)
 {
 	long	now;
 

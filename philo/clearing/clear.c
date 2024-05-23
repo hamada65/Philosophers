@@ -12,22 +12,22 @@
 
 #include "../philo.h"
 
-void clear_philos(t_philo *philo)
+void	clear_philos(t_philo *philo)
 {
-    t_philo *tmp;
+	t_philo	*tmp;
 
-    while (philo)
-    {
-        pthread_mutex_destroy(&philo->philo_mutex);
-        tmp = philo->next;
-        free(philo);
-        philo = tmp;
-    }
+	while (philo)
+	{
+		pthread_mutex_destroy(&philo->philo_mutex);
+		tmp = philo->next;
+		free(philo);
+		philo = tmp;
+	}
 }
 
-void clear_all(t_data *data)
+void	clear_all(t_data *data)
 {
-    int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
@@ -35,7 +35,7 @@ void clear_all(t_data *data)
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
-    pthread_mutex_destroy(&data->table_mutex);
-    free(data->forks);
-    clear_philos(data->philo);
+	pthread_mutex_destroy(&data->table_mutex);
+	free(data->forks);
+	clear_philos(data->philo);
 }

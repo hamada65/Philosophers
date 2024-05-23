@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:06:27 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/17 03:15:38 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:57:17 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long	ft_atol(const char *nptr)
 {
-	char		*str;
+	char	*str;
 	long	result;
 
 	str = (char *)nptr;

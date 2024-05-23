@@ -6,15 +6,15 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:04:25 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/18 05:11:33 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:00:31 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void philo_add_back(t_philo **alst, t_philo *new)
+void	philo_add_back(t_philo **alst, t_philo *new)
 {
-	t_philo *tmp;
+	t_philo	*tmp;
 
 	if (!*alst)
 	{
@@ -27,10 +27,21 @@ void philo_add_back(t_philo **alst, t_philo *new)
 	tmp->next = new;
 }
 
-bool init_philo(t_data	*data)
+void	assign_forks(t_data *data, t_philo *tmp, int i)
 {
-	int i;
-	t_philo *tmp;
+	tmp->left_fork = &data->forks[(i + 1) % data->nb_philo];
+	tmp->right_fork = &data->forks[i];
+	if (tmp->id % 2 == 0)
+	{
+		tmp->left_fork = &data->forks[i];
+		tmp->right_fork = &data->forks[(i + 1) % data->nb_philo];
+	}
+}
+
+bool	init_philo(t_data *data)
+{
+	int		i;
+	t_philo	*tmp;
 
 	i = 0;
 	while (i < data->nb_philo)
@@ -41,13 +52,7 @@ bool init_philo(t_data	*data)
 		tmp->id = i + 1;
 		tmp->meals_nb = 0;
 		tmp->last_meal = -1;
-		tmp->left_fork = &data->forks[(i + 1) % data->nb_philo];
-		tmp->right_fork = &data->forks[i];
-		if (tmp->id % 2 == 0)
-		{
-			tmp->left_fork = &data->forks[i];
-			tmp->right_fork = &data->forks[(i + 1) % data->nb_philo];
-		}
+		assign_forks(data, tmp, i);
 		philo_add_back(&data->philo, tmp);
 		tmp->next = NULL;
 		tmp->data = data;
@@ -58,9 +63,9 @@ bool init_philo(t_data	*data)
 	return (true);
 }
 
-void init_mutex(t_data *data)
+void	init_mutex(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->nb_philo)
@@ -68,7 +73,7 @@ void init_mutex(t_data *data)
 		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(&data->table_mutex,  NULL);
+	pthread_mutex_init(&data->table_mutex, NULL);
 }
 
 bool	data_init(int ac, char **av, t_data *data)
@@ -83,18 +88,17 @@ bool	data_init(int ac, char **av, t_data *data)
 	data->philo = NULL;
 	data->monitor = true;
 	data->ready_to_start = false;
-	data->forks = NULL;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->forks)
 	{
 		printf("\033[1;31m Memory Allocation Error ❌\033[0m\n");
 		return (false);
 	}
-	if  (!init_philo(data))
+	if (!init_philo(data))
 	{
 		free(data->forks);
-    	clear_philos(data->philo);
-		printf("\033[1;31m Memory Allocation Error ❌\033[0m\n");		
+		clear_philos(data->philo);
+		printf("\033[1;31m Memory Allocation Error ❌\033[0m\n");
 		return (false);
 	}
 	init_mutex(data);
