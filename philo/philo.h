@@ -54,6 +54,7 @@ struct					s_data
 	bool				ready_to_start;
 	long				start_time;
 	pthread_mutex_t		table_mutex;
+	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		*forks;
 	t_philo				*philo;
 };

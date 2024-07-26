@@ -74,6 +74,7 @@ void	init_mutex(t_data *data)
 		i++;
 	}
 	pthread_mutex_init(&data->table_mutex, NULL);
+	pthread_mutex_init(&data->print_mutex, NULL);
 }
 
 bool	data_init(int ac, char **av, t_data *data)

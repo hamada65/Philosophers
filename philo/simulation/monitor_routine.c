@@ -34,7 +34,8 @@ bool	all_started(t_data *data)
 	tmp = data->philo;
 	while (tmp)
 	{
-		if (tmp->last_meal == -1)
+// tmp->last_meal
+		if (get_long(&tmp->philo_mutex, &tmp->last_meal) == -1)
 			return (false);
 		tmp = tmp->next;
 	}
@@ -71,9 +72,11 @@ void	*monitor_routine(void *arg)
 			if (check_dead(tmp))
 			{
 				set_bool(&data->table_mutex, &data->monitor, false);
+				pthread_mutex_lock(&data->print_mutex);
 				printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n",
 					gettime(MILLISECOND) - data->start_time, tmp->id,
 					"\033[1;31mis dead 💀");
+				pthread_mutex_unlock(&data->print_mutex);
 			}
 			if (data->required_meals != -1 && all_reached_max(data))
 				set_bool(&data->table_mutex, &data->monitor, false);

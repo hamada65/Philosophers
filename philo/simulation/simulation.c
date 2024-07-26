@@ -19,8 +19,10 @@ void	print_status(long start, char *status, t_philo *philo, long now)
 	if (philo->max || !running_simulation(philo->data))
 		return ;
 	time = now - start;
+	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", time,
 		philo->id, status);
+	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
 void	start_simulation(t_data *data)

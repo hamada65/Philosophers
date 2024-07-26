@@ -36,6 +36,7 @@ void	clear_all(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->table_mutex);
+	pthread_mutex_destroy(&data->print_mutex);
 	free(data->forks);
 	clear_philos(data->philo);
 }
