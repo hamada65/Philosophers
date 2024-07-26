@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 22:18:40 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/23 22:45:35 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:28:58 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void					print_status(long start, char *status, t_philo *philo,
 							long now);
 void					de_synchronize_philos(t_philo *philo);
 void					thinking(t_philo *philo, bool print);
-void					my_usleep(long time);
+void					my_usleep(long time, t_data *data);
 
 // clear and exit
 void					clear_all(t_data *data);
