@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 05:37:02 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/18 05:11:29 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:04:30 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	all_started(t_data *data)
 	tmp = data->philo;
 	while (tmp)
 	{
-// tmp->last_meal
 		if (get_long(&tmp->philo_mutex, &tmp->last_meal) == -1)
 			return (false);
 		tmp = tmp->next;
@@ -56,14 +55,19 @@ bool	all_reached_max(t_data *data)
 	return (true);
 }
 
+void	wait_all_started(t_data *data)
+{
+	while (!all_started(data))
+		;
+}
+
 void	*monitor_routine(void *arg)
 {
 	t_data	*data;
 	t_philo	*tmp;
 
 	data = (void *)arg;
-	while (!all_started(data))
-		;
+	wait_all_started(data);
 	while (running_simulation(data))
 	{
 		tmp = data->philo;

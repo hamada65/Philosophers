@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 03:47:22 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/07/26 22:30:00 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:07:20 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sleeping(t_philo *philo)
 {
 	print_status(philo->data->start_time, "\033[1;36mis sleeping 🛌", philo,
 		gettime(MILLISECOND));
-	my_usleep(philo->data->time_to_sleep, philo->data);
+	my_usleep(philo->data->time_to_sleep);
 }
 
 void	eating(t_philo *philo)
@@ -37,7 +37,7 @@ void	eating(t_philo *philo)
 	print_status(philo->data->start_time, "\033[1;32mis eating 🍽️", philo,
 		gettime(MILLISECOND));
 	philo->meals_nb++;
-	my_usleep(philo->data->time_to_eat, philo->data);
+	my_usleep(philo->data->time_to_eat);
 	if (philo->data->required_meals >= 0
 		&& philo->meals_nb >= philo->data->required_meals)
 		set_bool(&philo->philo_mutex, &philo->max, true);
@@ -63,6 +63,7 @@ void	thinking(t_philo *philo, bool print)
 	long	t_sleep;
 	long	t_think;
 
+	t_think = 0;
 	if (print)
 		print_status(philo->data->start_time, "\033[1;35mis thinking 💭", philo,
 			gettime(MILLISECOND));
@@ -74,7 +75,7 @@ void	thinking(t_philo *philo, bool print)
 		t_think = 0;
 	else if (t_sleep <= t_eat)
 		t_think = (t_eat * 2) - t_sleep;
-	my_usleep(t_think / 2, philo->data);
+	my_usleep(t_think / 2);
 }
 
 void	*philo_routine(void *arg)
