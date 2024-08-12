@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:23:14 by mel-rhay          #+#    #+#             */
-/*   Updated: 2024/05/23 22:17:07 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:51:32 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	print_status(long start, char *status, t_philo *philo, long now)
 {
 	long	time;
 
-	if (philo->max || !running_simulation(philo->data))
+	if (philo->max)
 		return ;
 	time = now - start;
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", time,
-		philo->id, status);
+	if (running_simulation(philo->data))
+		printf("\033[1;37m⏰\033[0m [%ld]\t🧐 Philo [%d] %s\033[0m\n", time,
+			philo->id, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
